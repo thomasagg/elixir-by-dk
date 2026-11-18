@@ -1,10 +1,25 @@
 <!doctype html>
-<html lang="en">
+<html lang="el">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Elixir by D&amp;K: skincare with peptides, vitamin C and niacinamide.">
 <title>Elixir by D&amp;K</title>
+<meta name="description" content="Elixir by D&amp;K: περιποίηση επιδερμίδας με πεπτίδια, βιταμίνη C και νιασιναμίδη.">
+<meta name="theme-color" content="#f7f1e8">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Elixir by D&amp;K">
+<meta property="og:title" content="Elixir by D&amp;K">
+<meta property="og:description" content="Η επιδερμίδα σας. Η τελετουργία σας. Περιποίηση με πεπτίδια, βιταμίνη C και νιασιναμίδη.">
+<meta property="og:url" content="https://thomasagg.github.io/elixir-by-dk/">
+<meta property="og:image" content="https://thomasagg.github.io/elixir-by-dk/img/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Elixir by D&amp;K peptide cream on soft linen">
+<meta property="og:locale" content="el_GR">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:wght@300;400&family=Manrope:wght@300;400;500;600&display=swap">
@@ -69,6 +84,9 @@
     letter-spacing: -0.005em;
   }
   h1 { font-size: clamp(40px, 5.4vw, 64px); line-height: 1.08; }
+  /* Greek lines run longer, so the hero heading steps down to keep two lines */
+  html[lang="el"] h1 { font-size: clamp(32px, 3.9vw, 52px); }
+  html[lang="el"] h2 { font-size: clamp(28px, 3.1vw, 38px); }
   h2 { font-size: clamp(30px, 3.6vw, 42px); line-height: 1.15; }
   h3 { font-size: 21px; line-height: 1.3; font-weight: 400; }
   p { margin: 0; max-width: 46ch; color: var(--muted); }
@@ -267,9 +285,15 @@
     border-radius: 50%;
     overflow: hidden;
     margin-bottom: 10px;
-    background: var(--stone);
+    background-color: var(--stone);
+    background-image: url("img/textures.jpg");
+    background-size: 184% auto;
+    background-repeat: no-repeat;
   }
-  .swatch img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.55); }
+  /* the texture photo stacks three swatches top to bottom: amber oil, white cream, clear gel */
+  .swatch-amber { background-position: 50% 6%; }
+  .swatch-cream { background-position: 50% 50%; }
+  .swatch-gel { background-position: 50% 92%; }
   .ingredient h3 { font-family: var(--body); font-size: 15px; font-weight: 500; }
   .ingredient p { font-size: 13px; max-width: 24ch; }
 
@@ -517,17 +541,17 @@
       </div>
       <div class="ingredient-list">
         <div class="ingredient">
-          <div class="swatch"><img src="img/textures.jpg" alt="" style="object-position: 50% 49%"></div>
+          <div class="swatch swatch-cream" aria-hidden="true"></div>
           <h3 data-i18n="iPepName">Peptides</h3>
           <p data-i18n="iPepText">Support elasticity and firmness</p>
         </div>
         <div class="ingredient">
-          <div class="swatch"><img src="img/textures.jpg" alt="" style="object-position: 50% 85%"></div>
+          <div class="swatch swatch-gel" aria-hidden="true"></div>
           <h3 data-i18n="iNiaName">Niacinamide</h3>
           <p data-i18n="iNiaText">Improves the look and tone of the skin</p>
         </div>
         <div class="ingredient">
-          <div class="swatch"><img src="img/textures.jpg" alt="" style="object-position: 50% 14%"></div>
+          <div class="swatch swatch-amber" aria-hidden="true"></div>
           <h3 data-i18n="iVitName">Vitamin C</h3>
           <p data-i18n="iVitText">Brings radiance and antioxidant protection</p>
         </div>
@@ -688,9 +712,10 @@
     b.addEventListener("click", function () { setLang(b.dataset.lang); });
   });
 
-  var saved = "en";
-  try { saved = localStorage.getItem("elixir-lang") || "en"; } catch (e) {}
-  setLang(saved === "el" ? "el" : "en");
+  // Greek unless the visitor picked English before
+  var saved = "el";
+  try { saved = localStorage.getItem("elixir-lang") || "el"; } catch (e) {}
+  setLang(saved === "en" ? "en" : "el");
 })();
 </script>
 </body>
