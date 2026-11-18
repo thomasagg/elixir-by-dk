@@ -1,0 +1,697 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Elixir by D&amp;K: skincare with peptides, vitamin C and niacinamide.">
+<title>Elixir by D&amp;K</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:wght@300;400&family=Manrope:wght@300;400;500;600&display=swap">
+<style>
+  /* Layout: soft beige bands alternating image and text halves, as in the brand mockup; dark bark footer. Single warm light look by design. */
+  :root {
+    --cream: #f7f1e8;
+    --sand: #efe5d6;
+    --stone: #e7dac7;
+    --ink: #33241a;
+    --muted: #7b6757;
+    --gold: #a9844e;
+    --gold-deep: #86663a;
+    --line: #dccbb3;
+    --bark: #3b2719;
+    --on-bark: #eee2d1;
+    --on-bark-muted: #b9a58e;
+    --display: "Noto Serif Display", "Didot", "Bodoni 72", Georgia, serif;
+    --body: "Manrope", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    --gutter-l: max(16px, env(safe-area-inset-left, 0px));
+    --gutter-r: max(16px, env(safe-area-inset-right, 0px));
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: var(--body);
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible { outline: 1px solid var(--gold); outline-offset: 4px; }
+
+  .wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding-left: var(--gutter-l);
+    padding-right: var(--gutter-r);
+  }
+
+  /* type */
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin: 0;
+  }
+  h1, h2, h3 {
+    font-family: var(--display);
+    font-weight: 300;
+    color: var(--ink);
+    margin: 0;
+    text-wrap: balance;
+    letter-spacing: -0.005em;
+  }
+  h1 { font-size: clamp(40px, 5.4vw, 64px); line-height: 1.08; }
+  h2 { font-size: clamp(30px, 3.6vw, 42px); line-height: 1.15; }
+  h3 { font-size: 21px; line-height: 1.3; font-weight: 400; }
+  p { margin: 0; max-width: 46ch; color: var(--muted); }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    border: 1px solid var(--gold);
+    color: var(--gold-deep);
+    padding: 12px 22px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background-color .25s, color .25s;
+    width: fit-content;
+  }
+  .btn:hover { background: var(--gold); color: var(--cream); }
+  .btn svg { width: 16px; height: 10px; }
+
+  /* header */
+  .site-header {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 20;
+    background: color-mix(in srgb, var(--cream) 92%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid transparent;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0 0 auto;
+    height: env(safe-area-inset-top, 0px);
+    z-index: 21;
+    background: var(--cream);
+  }
+  .header-row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding-block: 18px;
+    gap: 16px;
+  }
+  .lang {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+  }
+  .lang button {
+    background: none;
+    border: 0;
+    padding: 4px 2px;
+    font: inherit;
+    letter-spacing: inherit;
+    color: var(--muted);
+    cursor: pointer;
+  }
+  .lang button[aria-pressed="true"] { color: var(--ink); font-weight: 600; }
+  .lang span { color: var(--line); }
+  .logo { text-align: center; text-decoration: none; line-height: 1; }
+  .logo-main {
+    display: block;
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: 34px;
+    letter-spacing: 0.16em;
+    color: var(--gold);
+    padding-left: 0.16em;
+  }
+  .logo-sub {
+    display: block;
+    margin-top: 6px;
+    font-size: 10px;
+    letter-spacing: 0.34em;
+    color: var(--gold);
+    padding-left: 0.34em;
+  }
+  .nav {
+    display: flex;
+    justify-content: flex-end;
+    gap: 26px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .nav a { text-decoration: none; padding-block: 4px; border-bottom: 1px solid transparent; }
+  .nav a:hover { border-bottom-color: var(--gold); }
+
+  /* hero */
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    background: linear-gradient(100deg, var(--cream) 0%, var(--sand) 60%, var(--stone) 100%);
+  }
+  .hero-text {
+    display: grid;
+    align-content: center;
+    gap: 22px;
+    padding-block: 72px;
+    padding-left: max(var(--gutter-l), calc((100vw - 1180px) / 2 + 16px));
+    padding-right: 40px;
+  }
+  .hero-img { min-height: 460px; position: relative; overflow: hidden; }
+  .hero-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 55%; }
+
+  /* values strip */
+  .values { background: var(--cream); border-bottom: 1px solid var(--line); }
+  .values-row {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    padding-block: 40px;
+    text-align: center;
+  }
+  .value { display: grid; justify-items: center; gap: 6px; }
+  .value svg { width: 30px; height: 30px; color: var(--gold); margin-bottom: 6px; }
+  .value h3 { font-family: var(--body); font-size: 15px; font-weight: 500; }
+  .value p { font-size: 13px; }
+
+  /* split section */
+  .split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    background: var(--sand);
+  }
+  .split-img { position: relative; min-height: 380px; overflow: hidden; }
+  .split-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .split-text {
+    display: grid;
+    align-content: center;
+    gap: 20px;
+    padding-block: 64px;
+    padding-left: clamp(24px, 6vw, 88px);
+    padding-right: var(--gutter-r);
+  }
+
+  /* products */
+  .products { background: var(--cream); padding-block: 88px; }
+  .section-head { display: grid; gap: 14px; margin-bottom: 48px; }
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 32px;
+  }
+  .product { display: grid; grid-template-rows: auto 1fr; gap: 22px; min-width: 0; }
+  .product-img { aspect-ratio: 4 / 5; overflow: hidden; background: var(--stone); max-width: 100%; }
+  .product-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s ease; }
+  .product:hover .product-img img { transform: scale(1.03); }
+  .product-body { display: grid; gap: 12px; align-content: start; }
+  .product-kind {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12px; color: var(--ink); letter-spacing: 0.04em; }
+  .tags li { list-style: none; display: flex; align-items: center; gap: 14px; }
+  .tags li + li::before { content: "\2726"; color: var(--gold); font-size: 9px; margin-left: -8px; }
+  .tags { padding: 0; margin: 0; }
+  .product-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  /* ingredients */
+  .ingredients { background: var(--sand); padding-block: 88px; }
+  .ingredients-row {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 2fr);
+    gap: 48px;
+    align-items: center;
+  }
+  .ingredients-intro { display: grid; gap: 20px; }
+  .ingredient-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px;
+    text-align: center;
+  }
+  .ingredient { display: grid; justify-items: center; gap: 8px; }
+  .swatch {
+    width: min(150px, 100%);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 10px;
+    background: var(--stone);
+  }
+  .swatch img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.55); }
+  .ingredient h3 { font-family: var(--body); font-size: 15px; font-weight: 500; }
+  .ingredient p { font-size: 13px; max-width: 24ch; }
+
+  /* philosophy */
+  .philosophy { background: var(--cream); padding-block: 96px; }
+  .philosophy-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    gap: 56px;
+    align-items: center;
+  }
+  .philosophy-text { display: grid; gap: 22px; }
+  .signature {
+    border-left: 1px solid var(--gold);
+    padding: 28px 0 28px 36px;
+    display: grid;
+    gap: 14px;
+  }
+  .signature p { font-family: var(--display); font-size: 22px; line-height: 1.4; color: var(--ink); font-weight: 300; }
+
+  /* ritual */
+  .ritual { background: var(--sand); padding-block: 88px; }
+  .ritual-row {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 2.2fr);
+    gap: 48px;
+    align-items: center;
+  }
+  .ritual-intro { display: grid; gap: 18px; }
+  .steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+    counter-reset: step;
+  }
+  .step { display: grid; justify-items: center; text-align: center; gap: 8px; counter-increment: step; position: relative; }
+  .step-visual {
+    width: 96px;
+    height: 120px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 6px;
+  }
+  .step-visual img { width: 96px; height: 120px; object-fit: cover; object-position: 50% 45%; border-radius: 48px 48px 6px 6px; }
+  .step-visual svg { width: 44px; height: 44px; color: var(--gold); }
+  .step h3 {
+    font-family: var(--body);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .step h3::before { content: counter(step) ". "; }
+  .step p { font-size: 13px; max-width: 20ch; }
+  .step:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 60px;
+    right: -18px;
+    width: 16px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  /* footer */
+  .site-footer { background: var(--bark); color: var(--on-bark); }
+  .footer-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 32px;
+    align-items: center;
+    padding-block: 40px 28px;
+  }
+  .site-footer .logo-main, .site-footer .logo-sub { color: var(--on-bark); }
+  .site-footer .logo-main { font-size: 26px; }
+  .footer-nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px 32px; font-size: 13px; }
+  .footer-nav a { text-decoration: none; color: var(--on-bark); }
+  .footer-nav a:hover { color: var(--gold); }
+  .site-footer .lang button { color: var(--on-bark-muted); }
+  .site-footer .lang button[aria-pressed="true"] { color: var(--on-bark); }
+  .site-footer .lang span { color: var(--on-bark-muted); }
+  .footer-bottom {
+    border-top: 1px solid color-mix(in srgb, var(--on-bark) 18%, transparent);
+    padding-block: 18px 26px;
+    font-size: 12px;
+    color: var(--on-bark-muted);
+  }
+  .footer-bottom p { color: inherit; max-width: none; }
+
+  /* responsive */
+  @media (max-width: 960px) {
+    .header-row { grid-template-columns: 1fr auto; }
+    .header-row .lang { order: 2; justify-content: flex-end; }
+    .header-row .logo { order: 1; text-align: left; }
+    .nav { order: 3; grid-column: 1 / -1; justify-content: center; flex-wrap: wrap; gap: 8px 22px; }
+    .ingredients-row, .ritual-row, .philosophy-row { grid-template-columns: minmax(0, 1fr); }
+    .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 36px; }
+    .step::after { display: none; }
+    .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 760px) {
+    .hero, .split { grid-template-columns: minmax(0, 1fr); }
+    .hero-text { padding-left: var(--gutter-l); padding-right: var(--gutter-r); padding-block: 48px; }
+    .hero-img { min-height: 360px; }
+    .split-img { min-height: 300px; }
+    .split-text { padding-left: var(--gutter-l); padding-block: 48px; }
+    .values-row { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+    .product-grid { grid-template-columns: minmax(0, 1fr); gap: 48px; }
+    .ingredient-list { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+    .footer-row { grid-template-columns: minmax(0, 1fr); justify-items: center; text-align: center; }
+    .footer-bottom { text-align: center; }
+    .products, .ingredients, .philosophy, .ritual { padding-block: 64px; }
+    .logo-main { font-size: 28px; }
+  }
+  @media (max-width: 420px) {
+    .nav { gap: 6px 16px; font-size: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-row">
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" id="lang-el-top" data-lang="el" aria-pressed="false">EL</button>
+      <span aria-hidden="true">|</span>
+      <button type="button" id="lang-en-top" data-lang="en" aria-pressed="true">EN</button>
+    </div>
+    <a class="logo" href="#top" aria-label="Elixir by D&amp;K">
+      <span class="logo-main">ELIXIR</span>
+      <span class="logo-sub">BY D&amp;K</span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="#products" data-i18n="navProducts">Products</a>
+      <a href="#ingredients" data-i18n="navIngredients">Ingredients</a>
+      <a href="#ritual" data-i18n="navRitual">Ritual</a>
+      <a href="#philosophy" data-i18n="navPhilosophy">Philosophy</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="hero-text">
+      <p class="eyebrow" data-i18n="heroEyebrow">Skincare, thoughtfully created</p>
+      <h1 data-i18n="heroTitle">Your skin.<br>Your ritual.</h1>
+      <p data-i18n="heroText">A more considered approach to everyday skincare. Active ingredients, careful formulas and a daily ritual you will enjoy keeping.</p>
+      <a class="btn" href="#products"><span data-i18n="heroCta">Discover Elixir</span>
+        <svg viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1"><path d="M0 5h15M11 1l4 4-4 4"/></svg></a>
+    </div>
+    <div class="hero-img">
+      <img src="img/peptide-cream.jpg" alt="Elixir by D&amp;K Advanced Peptide Anti-Age Cream on soft linen">
+    </div>
+  </section>
+
+  <section class="values" aria-label="What we stand for">
+    <div class="wrap values-row">
+      <div class="value">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"><path d="M12 4h8M13 4v9L6 26a2 2 0 0 0 1.8 3h16.4a2 2 0 0 0 1.8-3L19 13V4"/><path d="M9 21h14"/><circle cx="14" cy="24.5" r="1"/><circle cx="18.5" cy="23" r=".8"/></svg>
+        <h3 data-i18n="v1Title">Active ingredients</h3>
+        <p data-i18n="v1Text">A focus on what goes in</p>
+      </div>
+      <div class="value">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"><path d="M16 3c5 7 9 11.5 9 17a9 9 0 0 1-18 0c0-5.5 4-10 9-17z"/><path d="M12 21a4 4 0 0 0 4 4"/></svg>
+        <h3 data-i18n="v2Title">Skin rituals</h3>
+        <p data-i18n="v2Text">Daily care</p>
+      </div>
+      <div class="value">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"><path d="M16 3c.8 6.5 6.5 12.2 13 13-6.5.8-12.2 6.5-13 13-.8-6.5-6.5-12.2-13-13 6.5-.8 12.2-6.5 13-13z"/></svg>
+        <h3 data-i18n="v3Title">Thoughtful care</h3>
+        <p data-i18n="v3Text">A considered experience</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="split">
+    <div class="split-img">
+      <img src="img/niacinamide-serum.webp" alt="Calming &amp; Restoring Niacinamide Serum in a green bottle on wet stone">
+    </div>
+    <div class="split-text">
+      <p class="eyebrow" data-i18n="colEyebrow">Our skincare collection</p>
+      <h2 data-i18n="colTitle">Science meets<br>natural beauty.</h2>
+      <p data-i18n="colText">Three carefully formulated products, designed to support your skin's natural balance and radiance.</p>
+      <a class="btn" href="#products"><span data-i18n="colCta">Explore all products</span>
+        <svg viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1"><path d="M0 5h15M11 1l4 4-4 4"/></svg></a>
+    </div>
+  </section>
+
+  <section class="products" id="products">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow" data-i18n="prodEyebrow">The collection</p>
+        <h2 data-i18n="prodTitle">Three formulas, one ritual.</h2>
+      </div>
+      <div class="product-grid">
+        <article class="product">
+          <div class="product-img"><img src="img/peptide-cream.jpg" alt="Advanced Peptide Anti-Age Cream" loading="lazy"></div>
+          <div class="product-body">
+            <span class="product-kind" data-i18n="p1Kind">Face cream</span>
+            <h3>Advanced Peptide Anti-Age Cream</h3>
+            <ul class="tags">
+              <li data-i18n="tPeptide">Peptides</li><li data-i18n="tFirming">Firming</li><li data-i18n="tHydrating">Hydrating</li>
+            </ul>
+            <p data-i18n="p1Text">A rich cream with peptides and hyaluronic acid, for skin that feels firmer and well hydrated.</p>
+            <div class="product-meta"><span>50 ml</span><span data-i18n="soon">Ingredients &amp; use: coming soon</span></div>
+          </div>
+        </article>
+        <article class="product">
+          <div class="product-img"><img src="img/vitamin-c-serum.webp" alt="Advanced Peptide + Probiotics Vitamin C Serum with fresh oranges" loading="lazy"></div>
+          <div class="product-body">
+            <span class="product-kind" data-i18n="p2Kind">Serum</span>
+            <h3>Advanced Peptide + Probiotics Vitamin&nbsp;C Serum</h3>
+            <ul class="tags">
+              <li data-i18n="tVitC">Vitamin C</li><li data-i18n="tProbiotics">Probiotics</li><li data-i18n="tAllSkin">All skin types</li>
+            </ul>
+            <p data-i18n="p2Text">A brightening serum that combines vitamin C with peptides and probiotics.</p>
+            <div class="product-meta"><span>50 ml</span><span data-i18n="soon">Ingredients &amp; use: coming soon</span></div>
+          </div>
+        </article>
+        <article class="product">
+          <div class="product-img"><img src="img/niacinamide-serum.webp" alt="Calming &amp; Restoring 5% Niacinamide Serum" loading="lazy"></div>
+          <div class="product-body">
+            <span class="product-kind" data-i18n="p3Kind">Serum</span>
+            <h3>Calming &amp; Restoring 5% Niacinamide Serum</h3>
+            <ul class="tags">
+              <li data-i18n="tBalancing">Balancing</li><li data-i18n="tPores">Pore care</li><li data-i18n="tHydrating">Hydrating</li>
+            </ul>
+            <p data-i18n="p3Text">A calming serum with 5% niacinamide that helps balance the skin and refine the look of pores.</p>
+            <div class="product-meta"><span>50 ml</span><span data-i18n="soon">Ingredients &amp; use: coming soon</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="ingredients" id="ingredients">
+    <div class="wrap ingredients-row">
+      <div class="ingredients-intro">
+        <p class="eyebrow" data-i18n="ingEyebrow">The science of skincare</p>
+        <h2 data-i18n="ingTitle">Powerful ingredients.<br>Visible difference.</h2>
+        <p data-i18n="ingText">The key active ingredients behind our formulas, and what each one does for your skin.</p>
+      </div>
+      <div class="ingredient-list">
+        <div class="ingredient">
+          <div class="swatch"><img src="img/textures.jpg" alt="" style="object-position: 50% 49%"></div>
+          <h3 data-i18n="iPepName">Peptides</h3>
+          <p data-i18n="iPepText">Support elasticity and firmness</p>
+        </div>
+        <div class="ingredient">
+          <div class="swatch"><img src="img/textures.jpg" alt="" style="object-position: 50% 85%"></div>
+          <h3 data-i18n="iNiaName">Niacinamide</h3>
+          <p data-i18n="iNiaText">Improves the look and tone of the skin</p>
+        </div>
+        <div class="ingredient">
+          <div class="swatch"><img src="img/textures.jpg" alt="" style="object-position: 50% 14%"></div>
+          <h3 data-i18n="iVitName">Vitamin C</h3>
+          <p data-i18n="iVitText">Brings radiance and antioxidant protection</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="philosophy" id="philosophy">
+    <div class="wrap philosophy-row">
+      <div class="philosophy-text">
+        <p class="eyebrow" data-i18n="phEyebrow">Our philosophy</p>
+        <h2 data-i18n="phTitle">More than skincare.<br>It's a mindset.</h2>
+        <p data-i18n="phText">Elixir by D&amp;K was born from our wish to bring science and natural beauty together, creating products that respect your skin and your time.</p>
+      </div>
+      <div class="signature">
+        <p class="eyebrow">Elixir by D&amp;K</p>
+        <p data-i18n="heroTitle">Your skin.<br>Your ritual.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="ritual" id="ritual">
+    <div class="wrap ritual-row">
+      <div class="ritual-intro">
+        <p class="eyebrow" data-i18n="riEyebrow">Your skincare ritual</p>
+        <h2 data-i18n="riTitle">Simple steps.<br>Lasting results.</h2>
+        <p data-i18n="riText">A complete routine for healthy, radiant and balanced skin.</p>
+      </div>
+      <ol class="steps">
+        <li class="step">
+          <div class="step-visual"><svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.1"><path d="M22 6c6 8 11 13.5 11 20a11 11 0 0 1-22 0c0-6.5 5-12 11-20z"/><path d="M17 28a5 5 0 0 0 5 5"/></svg></div>
+          <h3 data-i18n="s1Title">Cleanse</h3>
+          <p data-i18n="s1Text">Your usual gentle cleanser</p>
+        </li>
+        <li class="step">
+          <div class="step-visual"><img src="img/vitamin-c-serum.webp" alt="" loading="lazy"></div>
+          <h3 data-i18n="s2Title">Treat</h3>
+          <p data-i18n="s2Text">Vitamin C or Niacinamide serum</p>
+        </li>
+        <li class="step">
+          <div class="step-visual"><img src="img/peptide-cream.jpg" alt="" loading="lazy"></div>
+          <h3 data-i18n="s3Title">Moisturise</h3>
+          <p data-i18n="s3Text">Peptide Anti-Age Cream</p>
+        </li>
+        <li class="step">
+          <div class="step-visual"><svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.1"><circle cx="22" cy="22" r="8"/><path d="M22 4v6M22 34v6M4 22h6M34 22h6M9.3 9.3l4.2 4.2M30.5 30.5l4.2 4.2M9.3 34.7l4.2-4.2M30.5 13.5l4.2-4.2"/></svg></div>
+          <h3 data-i18n="s4Title">Protect</h3>
+          <p data-i18n="s4Text">Daily sunscreen</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-row">
+    <a class="logo" href="#top" aria-label="Elixir by D&amp;K">
+      <span class="logo-main">ELIXIR</span>
+      <span class="logo-sub">BY D&amp;K</span>
+    </a>
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="#products" data-i18n="navProducts">Products</a>
+      <a href="#ingredients" data-i18n="navIngredients">Ingredients</a>
+      <a href="#ritual" data-i18n="navRitual">Ritual</a>
+      <a href="#philosophy" data-i18n="navPhilosophy">Philosophy</a>
+    </nav>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" id="lang-el-foot" data-lang="el" aria-pressed="false">EL</button>
+      <span aria-hidden="true">|</span>
+      <button type="button" id="lang-en-foot" data-lang="en" aria-pressed="true">EN</button>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="footer-bottom"><p data-i18n="copyright">&copy; 2026 Elixir by D&amp;K. All rights reserved.</p></div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var el = {
+    navProducts: "Προϊόντα",
+    navIngredients: "Συστατικά",
+    navRitual: "Ρουτίνα",
+    navPhilosophy: "Φιλοσοφία",
+    heroEyebrow: "Περιποίηση με φροντίδα",
+    heroTitle: "Η επιδερμίδα σας.<br>Η τελετουργία σας.",
+    heroText: "Μια πιο προσεγμένη ματιά στην καθημερινή περιποίηση. Δραστικά συστατικά, προσεκτικές συνθέσεις και μια καθημερινή ρουτίνα που θα απολαμβάνετε.",
+    heroCta: "Ανακαλύψτε την Elixir",
+    v1Title: "Δραστικά συστατικά",
+    v1Text: "Εστίαση στα συστατικά",
+    v2Title: "Καθημερινή ρουτίνα",
+    v2Text: "Καθημερινή φροντίδα",
+    v3Title: "Προσεγμένη φροντίδα",
+    v3Text: "Προσεγμένη εμπειρία",
+    colEyebrow: "Η συλλογή μας",
+    colTitle: "Η επιστήμη συναντά<br>τη φυσική ομορφιά.",
+    colText: "Τρία προσεκτικά σχεδιασμένα προϊόντα που υποστηρίζουν τη φυσική ισορροπία και τη λάμψη της επιδερμίδας σας.",
+    colCta: "Δείτε όλα τα προϊόντα",
+    prodEyebrow: "Η συλλογή",
+    prodTitle: "Τρεις συνθέσεις, μία ρουτίνα.",
+    p1Kind: "Κρέμα προσώπου",
+    p2Kind: "Ορός",
+    p3Kind: "Ορός",
+    tPeptide: "Πεπτίδια",
+    tFirming: "Σύσφιξη",
+    tHydrating: "Ενυδάτωση",
+    tVitC: "Βιταμίνη C",
+    tProbiotics: "Προβιοτικά",
+    tAllSkin: "Για όλους τους τύπους δέρματος",
+    tBalancing: "Ισορροπία",
+    tPores: "Φροντίδα πόρων",
+    p1Text: "Πλούσια κρέμα με πεπτίδια και υαλουρονικό οξύ, για επιδερμίδα πιο σφριγηλή και ενυδατωμένη.",
+    p2Text: "Ορός λάμψης που συνδυάζει βιταμίνη C με πεπτίδια και προβιοτικά.",
+    p3Text: "Καταπραϋντικός ορός με 5% νιασιναμίδη, που βοηθά στην ισορροπία της επιδερμίδας και βελτιώνει την όψη των πόρων.",
+    soon: "Συστατικά & χρήση: σύντομα",
+    ingEyebrow: "Η επιστήμη της περιποίησης",
+    ingTitle: "Δραστικά συστατικά.<br>Ορατή διαφορά.",
+    ingText: "Τα βασικά δραστικά συστατικά των συνθέσεών μας και τι προσφέρει το καθένα στην επιδερμίδα σας.",
+    iPepName: "Πεπτίδια",
+    iPepText: "Στηρίζουν την ελαστικότητα και τη σφριγηλότητα",
+    iNiaName: "Νιασιναμίδη",
+    iNiaText: "Βελτιώνει την όψη και τον τόνο της επιδερμίδας",
+    iVitName: "Βιταμίνη C",
+    iVitText: "Προσφέρει λάμψη και αντιοξειδωτική προστασία",
+    phEyebrow: "Η φιλοσοφία μας",
+    phTitle: "Κάτι παραπάνω από περιποίηση.<br>Ένας τρόπος σκέψης.",
+    phText: "Η Elixir by D&amp;K γεννήθηκε από την επιθυμία μας να συνδυάσουμε την επιστήμη με τη φυσική ομορφιά, δημιουργώντας προϊόντα που σέβονται το δέρμα και τον χρόνο σας.",
+    riEyebrow: "Η ρουτίνα σας",
+    riTitle: "Απλά βήματα.<br>Διαρκή αποτελέσματα.",
+    riText: "Μια ολοκληρωμένη ρουτίνα για υγιή, λαμπερή και ισορροπημένη επιδερμίδα.",
+    s1Title: "Καθαρισμός",
+    s1Text: "Το ήπιο καθαριστικό σας",
+    s2Title: "Ορός",
+    s2Text: "Ορός βιταμίνης C ή νιασιναμίδης",
+    s3Title: "Ενυδάτωση",
+    s3Text: "Κρέμα με πεπτίδια",
+    s4Title: "Προστασία",
+    s4Text: "Αντηλιακό κάθε μέρα",
+    copyright: "&copy; 2026 Elixir by D&amp;K. Με την επιφύλαξη παντός δικαιώματος."
+  };
+
+  var nodes = document.querySelectorAll("[data-i18n]");
+  nodes.forEach(function (n) { n.dataset.en = n.innerHTML; });
+
+  function setLang(lang) {
+    nodes.forEach(function (n) {
+      var key = n.dataset.i18n;
+      n.innerHTML = lang === "el" && el[key] ? el[key] : n.dataset.en;
+    });
+    document.documentElement.lang = lang;
+    document.querySelectorAll(".lang button").forEach(function (b) {
+      b.setAttribute("aria-pressed", String(b.dataset.lang === lang));
+    });
+    try { localStorage.setItem("elixir-lang", lang); } catch (e) {}
+  }
+
+  document.querySelectorAll(".lang button").forEach(function (b) {
+    b.addEventListener("click", function () { setLang(b.dataset.lang); });
+  });
+
+  var saved = "en";
+  try { saved = localStorage.getItem("elixir-lang") || "en"; } catch (e) {}
+  setLang(saved === "el" ? "el" : "en");
+})();
+</script>
+</body>
+</html>
