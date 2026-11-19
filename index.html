@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Elixir by D&amp;K</title>
-<meta name="description" content="Elixir by D&amp;K: περιποίηση επιδερμίδας με πεπτίδια, βιταμίνη C και νιασιναμίδη.">
+<meta name="description" content="Elixir by D&amp;K: φυσική περιποίηση προσώπου με πεπτίδια, bakuchiol, βιταμίνη C και νιασιναμίδη.">
 <meta name="theme-color" content="#f7f1e8">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Elixir by D&amp;K">
 <meta property="og:title" content="Elixir by D&amp;K">
-<meta property="og:description" content="Η επιδερμίδα σας. Η τελετουργία σας. Περιποίηση με πεπτίδια, βιταμίνη C και νιασιναμίδη.">
+<meta property="og:description" content="Η φυσική ομορφιά είναι η πιο δυνατή σου λάμψη. Φυσική περιποίηση προσώπου με πεπτίδια, bakuchiol, βιταμίνη C και νιασιναμίδη.">
 <meta property="og:url" content="https://thomasagg.github.io/elixir-by-dk/">
 <meta property="og:image" content="https://thomasagg.github.io/elixir-by-dk/img/og-image.jpg">
 <meta property="og:image:width" content="1200">
@@ -274,28 +274,63 @@
   .ingredients-intro { display: grid; gap: 20px; }
   .ingredient-list {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 28px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 36px 20px;
     text-align: center;
   }
-  .ingredient { display: grid; justify-items: center; gap: 8px; }
-  .swatch {
-    width: min(150px, 100%);
-    aspect-ratio: 1;
+  .ingredient { display: grid; justify-items: center; align-content: start; gap: 6px; }
+  /* line icons in a gold ring, echoing the ingredient icons in the printed brochure */
+  .ing-icon {
+    width: 64px;
+    height: 64px;
+    border: 1px solid var(--gold);
     border-radius: 50%;
-    overflow: hidden;
-    margin-bottom: 10px;
-    background-color: var(--stone);
-    background-image: url("img/textures.jpg");
-    background-size: 184% auto;
-    background-repeat: no-repeat;
+    display: grid;
+    place-items: center;
+    color: var(--gold);
+    margin-bottom: 8px;
+    font-family: var(--display);
+    font-size: 19px;
+    line-height: 1;
   }
-  /* the texture photo stacks three swatches top to bottom: amber oil, white cream, clear gel */
-  .swatch-amber { background-position: 50% 6%; }
-  .swatch-cream { background-position: 50% 50%; }
-  .swatch-gel { background-position: 50% 92%; }
-  .ingredient h3 { font-family: var(--body); font-size: 15px; font-weight: 500; }
-  .ingredient p { font-size: 13px; max-width: 24ch; }
+  .ing-icon svg { width: 28px; height: 28px; }
+  .ingredient h3 { font-family: var(--body); font-size: 14px; font-weight: 500; line-height: 1.4; }
+  .ingredient h3 small { display: block; font-size: 12px; font-weight: 400; color: var(--muted); }
+  .ingredient p { font-size: 13px; max-width: 22ch; }
+
+  /* benefit lists (products, bakuchiol) */
+  .benefits { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; font-size: 13px; color: var(--muted); }
+  .benefits li { position: relative; padding-left: 20px; }
+  .benefits li::before { content: "\2726"; position: absolute; left: 0; top: 0; color: var(--gold); font-size: 9px; line-height: 2.5; }
+  .benefits strong { color: var(--ink); font-weight: 600; }
+  .benefits-lg { font-size: 14px; gap: 14px; }
+  .benefits-lg li::before { line-height: 2.6; }
+
+  /* bakuchiol */
+  .bakuchiol { background: var(--cream); padding-block: 88px; }
+  .bak-head { display: grid; gap: 18px; }
+  .bak-lists {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 48px;
+    margin-top: 48px;
+  }
+  .bak-col { display: grid; gap: 20px; align-content: start; border-top: 1px solid var(--line); padding-top: 28px; }
+  .bak-col .benefits { max-width: 52ch; }
+
+  /* contact */
+  .contact { background: var(--sand); padding-block: 88px; }
+  .contact-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: 56px;
+    align-items: center;
+  }
+  .contact-intro { display: grid; gap: 20px; }
+  .contact-links { display: grid; gap: 18px; border-left: 1px solid var(--gold); padding: 8px 0 8px 36px; }
+  .contact-link { display: flex; align-items: center; gap: 14px; text-decoration: none; font-size: 17px; color: var(--ink); width: fit-content; }
+  .contact-link svg { width: 22px; height: 22px; color: var(--gold); flex-shrink: 0; }
+  .contact-link:hover span { border-bottom: 1px solid var(--gold); }
 
   /* philosophy */
   .philosophy { background: var(--cream); padding-block: 96px; }
@@ -384,15 +419,22 @@
     font-size: 12px;
     color: var(--on-bark-muted);
   }
+  .footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
   .footer-bottom p { color: inherit; max-width: none; }
+  .footer-bottom a { text-decoration: none; }
+  .footer-bottom a:hover { color: var(--on-bark); }
 
   /* responsive */
-  @media (max-width: 960px) {
+  /* five nav links no longer fit beside the centred logo below this width */
+  @media (max-width: 1100px) {
     .header-row { grid-template-columns: 1fr auto; }
     .header-row .lang { order: 2; justify-content: flex-end; }
     .header-row .logo { order: 1; text-align: left; }
     .nav { order: 3; grid-column: 1 / -1; justify-content: center; flex-wrap: wrap; gap: 8px 22px; }
-    .ingredients-row, .ritual-row, .philosophy-row { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (max-width: 960px) {
+    .ingredients-row, .ritual-row, .philosophy-row, .contact-row { grid-template-columns: minmax(0, 1fr); }
+    .bak-lists { grid-template-columns: minmax(0, 1fr); gap: 36px; }
     .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 36px; }
     .step::after { display: none; }
     .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -405,10 +447,11 @@
     .split-text { padding-left: var(--gutter-l); padding-block: 48px; }
     .values-row { grid-template-columns: minmax(0, 1fr); gap: 28px; }
     .product-grid { grid-template-columns: minmax(0, 1fr); gap: 48px; }
-    .ingredient-list { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+    .ingredient-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 16px; }
     .footer-row { grid-template-columns: minmax(0, 1fr); justify-items: center; text-align: center; }
-    .footer-bottom { text-align: center; }
-    .products, .ingredients, .philosophy, .ritual { padding-block: 64px; }
+    .footer-bottom { justify-content: center; text-align: center; }
+    .products, .ingredients, .philosophy, .ritual, .bakuchiol, .contact { padding-block: 64px; }
+    .contact-links { padding-left: 24px; }
     .logo-main { font-size: 28px; }
   }
   @media (max-width: 420px) {
@@ -434,6 +477,7 @@
       <a href="#ingredients" data-i18n="navIngredients">Ingredients</a>
       <a href="#ritual" data-i18n="navRitual">Ritual</a>
       <a href="#philosophy" data-i18n="navPhilosophy">Philosophy</a>
+      <a href="#contact" data-i18n="navContact">Contact</a>
     </nav>
   </div>
 </header>
@@ -441,9 +485,9 @@
 <main id="top">
   <section class="hero">
     <div class="hero-text">
-      <p class="eyebrow" data-i18n="heroEyebrow">Skincare, thoughtfully created</p>
+      <p class="eyebrow">Natural skincare</p>
       <h1 data-i18n="heroTitle">Your skin.<br>Your ritual.</h1>
-      <p data-i18n="heroText">A more considered approach to everyday skincare. Active ingredients, careful formulas and a daily ritual you will enjoy keeping.</p>
+      <p data-i18n="heroText">We create specialised facial care with selected ingredients and powerful action, for healthy, beautiful and radiant skin, every day.</p>
       <a class="btn" href="#products"><span data-i18n="heroCta">Discover Elixir</span>
         <svg viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1"><path d="M0 5h15M11 1l4 4-4 4"/></svg></a>
     </div>
@@ -474,12 +518,12 @@
 
   <section class="split">
     <div class="split-img">
-      <img src="img/niacinamide-serum.webp" alt="Calming &amp; Restoring Niacinamide Serum in a green bottle on wet stone">
+      <img src="img/collection.jpg" alt="The three Elixir by D&amp;K products on stone plinths with green leaves">
     </div>
     <div class="split-text">
       <p class="eyebrow" data-i18n="colEyebrow">Our skincare collection</p>
       <h2 data-i18n="colTitle">Science meets<br>natural beauty.</h2>
-      <p data-i18n="colText">Three carefully formulated products, designed to support your skin's natural balance and radiance.</p>
+      <p data-i18n="colText">A face cream and two specialised serums, for every skin need.</p>
       <a class="btn" href="#products"><span data-i18n="colCta">Explore all products</span>
         <svg viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1"><path d="M0 5h15M11 1l4 4-4 4"/></svg></a>
     </div>
@@ -495,37 +539,58 @@
         <article class="product">
           <div class="product-img"><img src="img/peptide-cream.jpg" alt="Advanced Peptide Anti-Age Cream" loading="lazy"></div>
           <div class="product-body">
-            <span class="product-kind" data-i18n="p1Kind">Face cream</span>
+            <span class="product-kind" data-i18n="p1Kind">Anti-age face cream</span>
             <h3>Advanced Peptide Anti-Age Cream</h3>
             <ul class="tags">
               <li data-i18n="tPeptide">Peptides</li><li data-i18n="tFirming">Firming</li><li data-i18n="tHydrating">Hydrating</li>
             </ul>
-            <p data-i18n="p1Text">A rich cream with peptides and hyaluronic acid, for skin that feels firmer and well hydrated.</p>
-            <div class="product-meta"><span>50 ml</span><span data-i18n="soon">Ingredients &amp; use: coming soon</span></div>
-          </div>
-        </article>
-        <article class="product">
-          <div class="product-img"><img src="img/vitamin-c-serum.webp" alt="Advanced Peptide + Probiotics Vitamin C Serum with fresh oranges" loading="lazy"></div>
-          <div class="product-body">
-            <span class="product-kind" data-i18n="p2Kind">Serum</span>
-            <h3>Advanced Peptide + Probiotics Vitamin&nbsp;C Serum</h3>
-            <ul class="tags">
-              <li data-i18n="tVitC">Vitamin C</li><li data-i18n="tProbiotics">Probiotics</li><li data-i18n="tAllSkin">All skin types</li>
+            <p data-i18n="p1Text">A rich yet light cream with a 5% peptide complex and precious ingredients that help reduce fine lines, improve elasticity and bring radiance to the skin.</p>
+            <ul class="benefits">
+              <li data-i18n="b1a">Reduces the look of fine lines &amp; wrinkles</li>
+              <li data-i18n="b1b">Improves elasticity &amp; firmness</li>
+              <li data-i18n="b1c">Deeply hydrates &amp; nourishes</li>
+              <li data-i18n="b1d">Protects &amp; strengthens the skin barrier</li>
+              <li data-i18n="b1e">Gives a healthy glow &amp; an even look</li>
             </ul>
-            <p data-i18n="p2Text">A brightening serum that combines vitamin C with peptides and probiotics.</p>
-            <div class="product-meta"><span>50 ml</span><span data-i18n="soon">Ingredients &amp; use: coming soon</span></div>
+            <div class="product-meta"><span>50 ml</span><span>5% Matrixyl&reg; 3000 &middot; 1% Bakuchiol</span></div>
           </div>
         </article>
         <article class="product">
-          <div class="product-img"><img src="img/niacinamide-serum.webp" alt="Calming &amp; Restoring 5% Niacinamide Serum" loading="lazy"></div>
+          <div class="product-img"><img src="img/vitamin-c-serum.webp" alt="Advanced Peptide + Vitamin C Serum with fresh oranges" loading="lazy"></div>
           <div class="product-body">
-            <span class="product-kind" data-i18n="p3Kind">Serum</span>
-            <h3>Calming &amp; Restoring 5% Niacinamide Serum</h3>
+            <span class="product-kind" data-i18n="p2Kind">Serum &middot; all skin types</span>
+            <h3>Advanced Peptide + Vitamin&nbsp;C Serum</h3>
+            <ul class="tags">
+              <li data-i18n="tVitC">Vitamin C</li><li data-i18n="tPeptide">Peptides</li><li data-i18n="tAllSkin">All skin types</li>
+            </ul>
+            <p data-i18n="p2Text">Peptides and lipid-soluble vitamin C in one serum for every skin type. Light, non-greasy texture.</p>
+            <ul class="benefits">
+              <li data-i18n="b2a">Deeply hydrates</li>
+              <li data-i18n="b2b">Improves elasticity</li>
+              <li data-i18n="b2c">Boosts natural radiance</li>
+              <li data-i18n="b2d">Protects against environmental stressors</li>
+              <li data-i18n="b2e">Ideal for daily use</li>
+            </ul>
+            <div class="product-meta"><span>30 ml</span><span data-i18n="light">Light &middot; non-greasy</span></div>
+          </div>
+        </article>
+        <article class="product">
+          <div class="product-img"><img src="img/niacinamide-serum.webp" alt="Oil Control Serum in a green bottle on wet stone" loading="lazy"></div>
+          <div class="product-body">
+            <span class="product-kind" data-i18n="p3Kind">Serum &middot; oily / combination skin</span>
+            <h3>Oil Control Serum</h3>
             <ul class="tags">
               <li data-i18n="tBalancing">Balancing</li><li data-i18n="tPores">Pore care</li><li data-i18n="tHydrating">Hydrating</li>
             </ul>
-            <p data-i18n="p3Text">A calming serum with 5% niacinamide that helps balance the skin and refine the look of pores.</p>
-            <div class="product-meta"><span>50 ml</span><span data-i18n="soon">Ingredients &amp; use: coming soon</span></div>
+            <p data-i18n="p3Text">5% niacinamide and 1% zinc PCA for oily and combination skin. Light, non-greasy texture.</p>
+            <ul class="benefits">
+              <li data-i18n="b3a">Regulates sebum production</li>
+              <li data-i18n="b3b">Reduces shine</li>
+              <li data-i18n="b3c">Soothes &amp; balances</li>
+              <li data-i18n="b3d">Improves skin texture</li>
+              <li data-i18n="b3e">Leaves a clean, fresh look</li>
+            </ul>
+            <div class="product-meta"><span>30 ml</span><span>5% Niacinamide &middot; 1% Zinc PCA</span></div>
           </div>
         </article>
       </div>
@@ -535,40 +600,80 @@
   <section class="ingredients" id="ingredients">
     <div class="wrap ingredients-row">
       <div class="ingredients-intro">
-        <p class="eyebrow" data-i18n="ingEyebrow">The science of skincare</p>
+        <p class="eyebrow" data-i18n="ingEyebrow">Key ingredients</p>
         <h2 data-i18n="ingTitle">Powerful ingredients.<br>Visible difference.</h2>
-        <p data-i18n="ingText">The key active ingredients behind our formulas, and what each one does for your skin.</p>
+        <p data-i18n="ingText">What goes into our Advanced Peptide Anti-Age Cream, and what each ingredient does for your skin.</p>
       </div>
       <div class="ingredient-list">
         <div class="ingredient">
-          <div class="swatch swatch-cream" aria-hidden="true"></div>
-          <h3 data-i18n="iPepName">Peptides</h3>
-          <p data-i18n="iPepText">Support elasticity and firmness</p>
+          <div class="ing-icon" aria-hidden="true"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"><path d="M14 4c4 5.5 7 9 7 13a7 7 0 0 1-14 0c0-4 3-7.5 7-13z"/><path d="M10.5 18a3.5 3.5 0 0 0 3.5 3.5"/></svg></div>
+          <h3 data-i18n="iHaName">Hyaluronic acid</h3>
+          <p data-i18n="iHaText">Deep, lasting hydration</p>
         </div>
         <div class="ingredient">
-          <div class="swatch swatch-gel" aria-hidden="true"></div>
-          <h3 data-i18n="iNiaName">Niacinamide</h3>
-          <p data-i18n="iNiaText">Improves the look and tone of the skin</p>
+          <div class="ing-icon" aria-hidden="true"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.1"><circle cx="14" cy="7.5" r="3"/><circle cx="7" cy="20" r="3"/><circle cx="21" cy="20" r="3"/><path d="M12.5 10.2 8.5 17.4M15.5 10.2l4 7.2M10 20h8"/></svg></div>
+          <h3>Matrixyl&reg; 3000</h3>
+          <p data-i18n="iMatText">Peptides that support firmness and smooth fine lines</p>
         </div>
         <div class="ingredient">
-          <div class="swatch swatch-amber" aria-hidden="true"></div>
-          <h3 data-i18n="iVitName">Vitamin C</h3>
-          <p data-i18n="iVitText">Brings radiance and antioxidant protection</p>
+          <div class="ing-icon" aria-hidden="true"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"><path d="M14 4l8.7 5v10L14 24l-8.7-5V9z"/><circle cx="14" cy="14" r="2.6"/></svg></div>
+          <h3 data-i18n="iNiaName">Niacinamide <small>(Vitamin B3)</small></h3>
+          <p data-i18n="iNiaText">Evens skin tone and supports the skin barrier</p>
+        </div>
+        <div class="ingredient">
+          <div class="ing-icon" aria-hidden="true"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"><path d="M6 22C6 12 12 6 23 5c0 11-6 17-17 17z"/><path d="M6 22 16 12"/></svg></div>
+          <h3 data-i18n="iBakName">Bakuchiol <small>(plant-based anti-age active)</small></h3>
+          <p data-i18n="iBakText">A gentle plant alternative to retinol</p>
+        </div>
+        <div class="ingredient">
+          <div class="ing-icon" aria-hidden="true">B5</div>
+          <h3 data-i18n="iPanName">Panthenol <small>(Pro-vitamin B5)</small></h3>
+          <p data-i18n="iPanText">Soothes and helps the skin recover</p>
+        </div>
+        <div class="ingredient">
+          <div class="ing-icon" aria-hidden="true"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"><ellipse cx="14" cy="16" rx="7" ry="8"/><path d="M14 8c0-2.2 1.2-3.6 3.5-4M11 13c1-1.6 2.4-2.4 4-2.4"/></svg></div>
+          <h3 data-i18n="iSheaName">Shea butter</h3>
+          <p data-i18n="iSheaText">Nourishes and softens</p>
+        </div>
+        <div class="ingredient">
+          <div class="ing-icon" aria-hidden="true"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"><path d="M14 3.5c5 4 7.5 9 7.5 13.5a7.5 7.5 0 0 1-15 0c0-4.5 2.5-9.5 7.5-13.5z"/><path d="M14 8.5v15"/></svg></div>
+          <h3 data-i18n="iAlmName">Almond oil</h3>
+          <p data-i18n="iAlmText">Adds suppleness and comfort</p>
+        </div>
+        <div class="ingredient">
+          <div class="ing-icon" aria-hidden="true">E</div>
+          <h3 data-i18n="iVitEName">Vitamin E</h3>
+          <p data-i18n="iVitEText">Antioxidant protection</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="philosophy" id="philosophy">
-    <div class="wrap philosophy-row">
-      <div class="philosophy-text">
-        <p class="eyebrow" data-i18n="phEyebrow">Our philosophy</p>
-        <h2 data-i18n="phTitle">More than skincare.<br>It's a mindset.</h2>
-        <p data-i18n="phText">Elixir by D&amp;K was born from our wish to bring science and natural beauty together, creating products that respect your skin and your time.</p>
+  <section class="bakuchiol" id="bakuchiol">
+    <div class="wrap">
+      <div class="bak-head">
+        <p class="eyebrow" data-i18n="bakEyebrow">Plant-based anti-age active</p>
+        <h2 data-i18n="bakTitle">Bakuchiol.<br>Gentle, plant-based renewal.</h2>
+        <p data-i18n="bakText">A plant-based alternative to retinol, at 1% in our Advanced Peptide Anti-Age Cream.</p>
       </div>
-      <div class="signature">
-        <p class="eyebrow">Elixir by D&amp;K</p>
-        <p data-i18n="heroTitle">Your skin.<br>Your ritual.</p>
+      <div class="bak-lists">
+        <div class="bak-col">
+          <h3 data-i18n="bakBenTitle">3 key benefits of Bakuchiol</h3>
+          <ul class="benefits benefits-lg">
+            <li data-i18n="bakBen1"><strong>Anti-aging without irritation:</strong> reduces wrinkles and fine lines by boosting collagen, without causing redness or peeling.</li>
+            <li data-i18n="bakBen2"><strong>Radiance and fewer dark spots:</strong> fades dark spots and discoloration, for a more even skin tone.</li>
+            <li data-i18n="bakBen3"><strong>Anti-acne action:</strong> its anti-inflammatory properties calm the skin and reduce breakouts.</li>
+          </ul>
+        </div>
+        <div class="bak-col">
+          <h3 data-i18n="bakWhoTitle">Who uses it?</h3>
+          <ul class="benefits benefits-lg">
+            <li data-i18n="bakWho1"><strong>People with sensitive skin:</strong> those with rosacea, eczema or atopic dermatitis who can't tolerate classic retinol.</li>
+            <li data-i18n="bakWho2"><strong>Pregnant and breastfeeding women:</strong> it is the completely safe alternative, as retinoids are strictly avoided during these periods.</li>
+            <li data-i18n="bakWho3"><strong>Beginners in anti-aging:</strong> those who want to start a powerful routine without retinol's &ldquo;adjustment period&rdquo; (retinization).</li>
+            <li data-i18n="bakWho4"><strong>Anyone who wants morning care:</strong> because it doesn't break down in sunlight, it can be used for anti-aging in the morning too.</li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
@@ -589,7 +694,7 @@
         <li class="step">
           <div class="step-visual"><img src="img/vitamin-c-serum.webp" alt="" loading="lazy"></div>
           <h3 data-i18n="s2Title">Treat</h3>
-          <p data-i18n="s2Text">Vitamin C or Niacinamide serum</p>
+          <p data-i18n="s2Text">Vitamin C or Oil Control serum</p>
         </li>
         <li class="step">
           <div class="step-visual"><img src="img/peptide-cream.jpg" alt="" loading="lazy"></div>
@@ -602,6 +707,43 @@
           <p data-i18n="s4Text">Daily sunscreen</p>
         </li>
       </ol>
+    </div>
+  </section>
+
+  <section class="philosophy" id="philosophy">
+    <div class="wrap philosophy-row">
+      <div class="philosophy-text">
+        <p class="eyebrow" data-i18n="phEyebrow">Our philosophy</p>
+        <h2 data-i18n="phTitle">More than skincare.<br>It's a mindset.</h2>
+        <p data-i18n="phText">Elixir by D&amp;K was born from our wish to bring science and natural beauty together, creating products that respect your skin and your time.</p>
+      </div>
+      <div class="signature">
+        <p class="eyebrow">Elixir by D&amp;K</p>
+        <p data-i18n="tagline">Natural beauty is your most powerful glow.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap contact-row">
+      <div class="contact-intro">
+        <p class="eyebrow" data-i18n="ctEyebrow">Get in touch</p>
+        <h2 data-i18n="ctTitle">Let's find the right<br>ritual for your skin.</h2>
+        <p data-i18n="ctText">For orders and questions, send us a message on Instagram or give us a call.</p>
+        <a class="btn" href="docs/elixir-brochure.pdf" target="_blank" rel="noopener"><span data-i18n="ctBrochure">Download our brochure (PDF)</span>
+          <svg viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1"><path d="M0 5h15M11 1l4 4-4 4"/></svg></a>
+      </div>
+      <div class="contact-links">
+        <a class="contact-link" href="https://www.instagram.com/dimitra.arapi/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".6" fill="currentColor"/></svg>
+          <span>@dimitra.arapi</span></a>
+        <a class="contact-link" href="tel:+306949598322">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"><path d="M5 3.5h3.2l1.6 4.2-2.1 1.4a11 11 0 0 0 5.2 5.2l1.4-2.1 4.2 1.6V17a2.5 2.5 0 0 1-2.7 2.5C9.6 19 5 14.4 4.5 6.2A2.5 2.5 0 0 1 5 3.5z"/></svg>
+          <span>6949 598 322</span></a>
+        <a class="contact-link" href="docs/bakuchiol.pdf" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 15.5h6"/></svg>
+          <span data-i18n="ctBakPdf">Bakuchiol fact sheet (PDF)</span></a>
+      </div>
     </div>
   </section>
 </main>
@@ -617,6 +759,7 @@
       <a href="#ingredients" data-i18n="navIngredients">Ingredients</a>
       <a href="#ritual" data-i18n="navRitual">Ritual</a>
       <a href="#philosophy" data-i18n="navPhilosophy">Philosophy</a>
+      <a href="#contact" data-i18n="navContact">Contact</a>
     </nav>
     <div class="lang" role="group" aria-label="Language">
       <button type="button" id="lang-el-foot" data-lang="el" aria-pressed="false">EL</button>
@@ -625,7 +768,10 @@
     </div>
   </div>
   <div class="wrap">
-    <div class="footer-bottom"><p data-i18n="copyright">&copy; 2026 Elixir by D&amp;K. All rights reserved.</p></div>
+    <div class="footer-bottom">
+      <p data-i18n="copyright">&copy; 2026 Elixir by D&amp;K. All rights reserved.</p>
+      <p><a href="https://www.instagram.com/dimitra.arapi/" target="_blank" rel="noopener">@dimitra.arapi</a> &middot; <a href="tel:+306949598322">6949 598 322</a></p>
+    </div>
   </div>
 </footer>
 
@@ -636,9 +782,9 @@
     navIngredients: "Συστατικά",
     navRitual: "Ρουτίνα",
     navPhilosophy: "Φιλοσοφία",
-    heroEyebrow: "Περιποίηση με φροντίδα",
+    navContact: "Επικοινωνία",
     heroTitle: "Η επιδερμίδα σας.<br>Η τελετουργία σας.",
-    heroText: "Μια πιο προσεγμένη ματιά στην καθημερινή περιποίηση. Δραστικά συστατικά, προσεκτικές συνθέσεις και μια καθημερινή ρουτίνα που θα απολαμβάνετε.",
+    heroText: "Δημιουργούμε εξειδικευμένη φροντίδα προσώπου με επιλεγμένα συστατικά και ισχυρή δράση, για υγιές, όμορφο και λαμπερό δέρμα, κάθε μέρα.",
     heroCta: "Ανακαλύψτε την Elixir",
     v1Title: "Δραστικά συστατικά",
     v1Text: "Εστίαση στα συστατικά",
@@ -648,48 +794,89 @@
     v3Text: "Προσεγμένη εμπειρία",
     colEyebrow: "Η συλλογή μας",
     colTitle: "Η επιστήμη συναντά<br>τη φυσική ομορφιά.",
-    colText: "Τρία προσεκτικά σχεδιασμένα προϊόντα που υποστηρίζουν τη φυσική ισορροπία και τη λάμψη της επιδερμίδας σας.",
+    colText: "Μία κρέμα προσώπου και 2 εξειδικευμένοι οροί για κάθε ανάγκη επιδερμίδας.",
     colCta: "Δείτε όλα τα προϊόντα",
     prodEyebrow: "Η συλλογή",
     prodTitle: "Τρεις συνθέσεις, μία ρουτίνα.",
-    p1Kind: "Κρέμα προσώπου",
-    p2Kind: "Ορός",
-    p3Kind: "Ορός",
+    p1Kind: "Κρέμα αντιγήρανσης",
+    p2Kind: "Ορός &middot; για όλους τους τύπους δέρματος",
+    p3Kind: "Ορός &middot; για λιπαρά / μικτά δέρματα",
     tPeptide: "Πεπτίδια",
     tFirming: "Σύσφιξη",
     tHydrating: "Ενυδάτωση",
     tVitC: "Βιταμίνη C",
-    tProbiotics: "Προβιοτικά",
-    tAllSkin: "Για όλους τους τύπους δέρματος",
+    tAllSkin: "Όλοι οι τύποι δέρματος",
     tBalancing: "Ισορροπία",
     tPores: "Φροντίδα πόρων",
-    p1Text: "Πλούσια κρέμα με πεπτίδια και υαλουρονικό οξύ, για επιδερμίδα πιο σφριγηλή και ενυδατωμένη.",
-    p2Text: "Ορός λάμψης που συνδυάζει βιταμίνη C με πεπτίδια και προβιοτικά.",
-    p3Text: "Καταπραϋντικός ορός με 5% νιασιναμίδη, που βοηθά στην ισορροπία της επιδερμίδας και βελτιώνει την όψη των πόρων.",
-    soon: "Συστατικά & χρήση: σύντομα",
-    ingEyebrow: "Η επιστήμη της περιποίησης",
+    p1Text: "Πλούσια, αλλά ανάλαφρη κρέμα με 5% σύμπλεγμα πεπτιδίων και πολύτιμα συστατικά που συμβάλλουν στη μείωση των λεπτών γραμμών, στη βελτίωση της ελαστικότητας και στη λάμψη της επιδερμίδας.",
+    b1a: "Μειώνει την εμφάνιση λεπτών γραμμών &amp; ρυτίδων",
+    b1b: "Βελτιώνει την ελαστικότητα &amp; τη σφριγηλότητα",
+    b1c: "Ενυδατώνει &amp; θρέφει σε βάθος",
+    b1d: "Προστατεύει &amp; ενισχύει τον επιδερμικό φραγμό",
+    b1e: "Χαρίζει υγιή λάμψη &amp; ομοιόμορφη όψη",
+    p2Text: "Πεπτίδια και λιποδιαλυτή βιταμίνη C σε έναν ορό για όλους τους τύπους δέρματος. Ελαφριά υφή, μη λιπαρή.",
+    b2a: "Ενυδατώνει σε βάθος",
+    b2b: "Βελτιώνει την ελαστικότητα",
+    b2c: "Ενισχύει τη φυσική λάμψη",
+    b2d: "Προστατεύει από τους περιβαλλοντικούς παράγοντες",
+    b2e: "Ιδανικό για καθημερινή χρήση",
+    light: "Ελαφριά υφή &middot; μη λιπαρή",
+    p3Text: "5% νιασιναμίδη και 1% zinc PCA για λιπαρά και μικτά δέρματα. Ελαφριά υφή, μη λιπαρή.",
+    b3a: "Ρυθμίζει την παραγωγή σμήγματος",
+    b3b: "Μειώνει τη γυαλάδα",
+    b3c: "Καταπραΰνει &amp; εξισορροπεί",
+    b3d: "Βελτιώνει την υφή της επιδερμίδας",
+    b3e: "Προσφέρει καθαρή &amp; φρέσκια όψη",
+    ingEyebrow: "Βασικά συστατικά",
     ingTitle: "Δραστικά συστατικά.<br>Ορατή διαφορά.",
-    ingText: "Τα βασικά δραστικά συστατικά των συνθέσεών μας και τι προσφέρει το καθένα στην επιδερμίδα σας.",
-    iPepName: "Πεπτίδια",
-    iPepText: "Στηρίζουν την ελαστικότητα και τη σφριγηλότητα",
-    iNiaName: "Νιασιναμίδη",
-    iNiaText: "Βελτιώνει την όψη και τον τόνο της επιδερμίδας",
-    iVitName: "Βιταμίνη C",
-    iVitText: "Προσφέρει λάμψη και αντιοξειδωτική προστασία",
+    ingText: "Τι περιέχει η Advanced Peptide Anti-Age Cream και τι προσφέρει κάθε συστατικό στην επιδερμίδα σας.",
+    iHaName: "Υαλουρονικό οξύ",
+    iHaText: "Βαθιά, διαρκής ενυδάτωση",
+    iMatText: "Πεπτίδια που στηρίζουν τη σφριγηλότητα και λειαίνουν τις λεπτές γραμμές",
+    iNiaName: "Niacinamide <small>(Βιταμίνη B3)</small>",
+    iNiaText: "Ομοιόμορφος τόνος και ενίσχυση του επιδερμικού φραγμού",
+    iBakName: "Bakuchiol <small>(Φυτικό anti-age ενεργό)</small>",
+    iBakText: "Ήπια φυτική εναλλακτική της ρετινόλης",
+    iPanName: "Πανθενόλη <small>(Προβιταμίνη B5)</small>",
+    iPanText: "Καταπραΰνει και βοηθά την αποκατάσταση",
+    iSheaName: "Shea Butter",
+    iSheaText: "Θρέφει και μαλακώνει",
+    iAlmName: "Αμυγδαλέλαιο",
+    iAlmText: "Ελαστικότητα και άνεση",
+    iVitEName: "Βιταμίνη E",
+    iVitEText: "Αντιοξειδωτική προστασία",
+    bakEyebrow: "Φυτικό anti-age ενεργό",
+    bakTitle: "Bakuchiol.<br>Φυτική, ήπια αντιγήρανση.",
+    bakText: "Φυτική εναλλακτική της ρετινόλης, σε ποσοστό 1% στην Advanced Peptide Anti-Age Cream μας.",
+    bakBenTitle: "Τα 3 κύρια οφέλη του Bakuchiol",
+    bakBen1: "<strong>Αντιγήρανση χωρίς ερεθισμούς:</strong> Μειώνει τις ρυτίδες και τις λεπτές γραμμές, αυξάνοντας το κολλαγόνο, χωρίς να προκαλεί κοκκινίλες ή ξεφλούδισμα.",
+    bakBen2: "<strong>Λάμψη και μείωση κηλίδων:</strong> Εξαφανίζει τις πανάδες και τις δυσχρωμίες, προσφέροντας ομοιόμορφο τόνο στο δέρμα.",
+    bakBen3: "<strong>Δράση κατά της ακμής:</strong> Έχει αντιφλεγμονώδεις ιδιότητες που ηρεμούν το δέρμα και μειώνουν τα σπυράκια.",
+    bakWhoTitle: "Ποιες (και ποιοι) το χρησιμοποιούν;",
+    bakWho1: "<strong>Άτομα με ευαίσθητο δέρμα:</strong> Όσοι υποφέρουν από ροδόχρου ακμή, έκζεμα ή ατοπική δερματίτιδα και δεν αντέχουν την κλασική ρετινόλη.",
+    bakWho2: "<strong>Έγκυες και θηλάζουσες:</strong> Αποτελεί την απόλυτα ασφαλή εναλλακτική, καθώς τα ρετινοειδή απαγορεύονται αυστηρά σε αυτές τις περιόδους.",
+    bakWho3: "<strong>Αρχάριοι στην αντιγήρανση:</strong> Όσοι θέλουν να ξεκινήσουν μια ισχυρή ρουτίνα χωρίς το ρίσκο της «περιόδου προσαρμογής» (retinization) της ρετινόλης.",
+    bakWho4: "<strong>Όσοι θέλουν πρωινή φροντίδα:</strong> Επειδή δεν διασπάται από τον ήλιο, το επιλέγουν όσοι θέλουν αντιγηραντική δράση και για το πρωί.",
     phEyebrow: "Η φιλοσοφία μας",
     phTitle: "Κάτι παραπάνω από περιποίηση.<br>Ένας τρόπος σκέψης.",
     phText: "Η Elixir by D&amp;K γεννήθηκε από την επιθυμία μας να συνδυάσουμε την επιστήμη με τη φυσική ομορφιά, δημιουργώντας προϊόντα που σέβονται το δέρμα και τον χρόνο σας.",
+    tagline: "Η φυσική ομορφιά είναι η πιο δυνατή σου λάμψη.",
     riEyebrow: "Η ρουτίνα σας",
     riTitle: "Απλά βήματα.<br>Διαρκή αποτελέσματα.",
     riText: "Μια ολοκληρωμένη ρουτίνα για υγιή, λαμπερή και ισορροπημένη επιδερμίδα.",
     s1Title: "Καθαρισμός",
     s1Text: "Το ήπιο καθαριστικό σας",
     s2Title: "Ορός",
-    s2Text: "Ορός βιταμίνης C ή νιασιναμίδης",
+    s2Text: "Ορός βιταμίνης C ή Oil Control",
     s3Title: "Ενυδάτωση",
     s3Text: "Κρέμα με πεπτίδια",
     s4Title: "Προστασία",
     s4Text: "Αντηλιακό κάθε μέρα",
+    ctEyebrow: "Επικοινωνία",
+    ctTitle: "Ας βρούμε τη σωστή<br>ρουτίνα για το δέρμα σας.",
+    ctText: "Για παραγγελίες και ερωτήσεις, στείλτε μας μήνυμα στο Instagram ή καλέστε μας.",
+    ctBrochure: "Κατεβάστε το έντυπό μας (PDF)",
+    ctBakPdf: "Ενημερωτικό για το Bakuchiol (PDF)",
     copyright: "&copy; 2026 Elixir by D&amp;K. Με την επιφύλαξη παντός δικαιώματος."
   };
 
