@@ -334,6 +334,49 @@
   .feature .eyebrow { color: #d9bf8f; }
   .feature h2 { color: #f3ead9; }
   .feature p { color: #b8c2cf; }
+  /* "how cold application helps": a tap-to-open panel on the ice band */
+  .cold { border-block: 1px solid rgba(217, 191, 143, 0.4); max-width: 520px; }
+  .cold summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 22px 0;
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: clamp(22px, 2.4vw, 30px);
+    line-height: 1.25;
+    letter-spacing: 0.06em;
+    color: #f3ead9;
+  }
+  .cold summary::-webkit-details-marker { display: none; }
+  .cold-toggle {
+    flex-shrink: 0;
+    position: relative;
+    width: 38px;
+    height: 38px;
+    border: 1px solid #d9bf8f;
+    border-radius: 50%;
+    transition: transform .3s ease, background-color .3s;
+  }
+  .cold-toggle::before, .cold-toggle::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 14px;
+    height: 1px;
+    background: #d9bf8f;
+    transform: translate(-50%, -50%);
+  }
+  .cold-toggle::after { transform: translate(-50%, -50%) rotate(90deg); }
+  .cold summary:hover .cold-toggle { background: rgba(217, 191, 143, 0.12); }
+  .cold[open] .cold-toggle { transform: rotate(45deg); }
+  .cold-body { list-style: none; margin: 0; padding: 0 0 26px; display: grid; gap: 18px; }
+  .cold-body li { font-size: 14px; line-height: 1.7; color: #b8c2cf; }
+  .cold-body strong { display: block; color: #f3ead9; font-weight: 600; margin-bottom: 2px; }
   .feature .btn { border-color: #d9bf8f; color: #f3ead9; }
   .feature .btn:hover { background: #d9bf8f; color: #0d1b2e; }
 
@@ -734,16 +777,19 @@
     </div>
   </section>
 
-  <section class="feature" aria-labelledby="feature-title">
+  <section class="feature" id="cold">
     <div class="feature-img">
       <img src="img/cream-ice.jpg" alt="Advanced Peptide Anti-Age Cream on a block of ice" loading="lazy">
     </div>
     <div class="feature-text">
-      <p class="eyebrow" data-i18n="ftEyebrow">Advanced Peptide Anti-Age Cream</p>
-      <h2 id="feature-title" data-i18n="ftTitle">Firmness, hydration<br>and radiance in one step.</h2>
-      <p data-i18n="ftText">5% Matrixyl&reg; 3000, niacinamide, panthenol and 1% bakuchiol, in a rich yet light texture.</p>
-      <a class="btn" href="#bakuchiol"><span data-i18n="ftCta">Discover Bakuchiol</span>
-        <svg viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1"><path d="M0 5h15M11 1l4 4-4 4"/></svg></a>
+      <details class="cold">
+        <summary><span data-i18n="coldTitle">HOW COLD APPLICATION HELPS</span><span class="cold-toggle" aria-hidden="true"></span></summary>
+        <ul class="cold-body">
+          <li data-i18n="cold1"><strong>Less puffiness and swelling.</strong> Low temperature causes temporary vasoconstriction. This helps morning puffiness go down quickly, especially around the eyes.</li>
+          <li data-i18n="cold2"><strong>Soothes irritation.</strong> The cool feeling brings instant relief from mild redness, a burning sensation or inflammation.</li>
+          <li data-i18n="cold3"><strong>Keeps it stable.</strong> Low temperatures (2&deg;C to 8&deg;C) slow down the chemical breakdown of some unstable peptides and antioxidants, keeping them active for longer.</li>
+        </ul>
+      </details>
     </div>
   </section>
 
@@ -788,7 +834,7 @@
       </div>
       <ol class="steps">
         <li class="step">
-          <div class="step-visual"><svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.1"><path d="M22 6c6 8 11 13.5 11 20a11 11 0 0 1-22 0c0-6.5 5-12 11-20z"/><path d="M17 28a5 5 0 0 0 5 5"/></svg></div>
+          <div class="step-visual"><img src="img/cleanse-gel.jpg" alt="" loading="lazy"></div>
           <h3 data-i18n="s1Title">Cleanse</h3>
           <p data-i18n="s1Text">Your usual gentle cleanser</p>
         </li>
@@ -957,10 +1003,10 @@
     why3Text: "Βοηθούν στην προστασία από τους περιβαλλοντικούς παράγοντες και κρατούν την υγρασία.",
     why4Title: "Για όλους τους τύπους δέρματος",
     why4Text: "Ήπια για καθημερινή χρήση, ακόμη και για ευαίσθητο δέρμα.",
-    ftEyebrow: "Advanced Peptide Anti-Age Cream",
-    ftTitle: "Σφριγηλότητα, ενυδάτωση<br>και λάμψη σε ένα βήμα.",
-    ftText: "5% Matrixyl&reg; 3000, νιασιναμίδη, πανθενόλη και 1% bakuchiol, σε πλούσια αλλά ανάλαφρη υφή.",
-    ftCta: "Ανακαλύψτε το Bakuchiol",
+    coldTitle: "ΠΩΣ ΒΟΗΘΑΕΙ Η ΚΡΥΑ ΕΦΑΡΜΟΓΗ",
+    cold1: "<strong>Μείωση οιδημάτων και πρηξίματος.</strong> Η χαμηλή θερμοκρασία προκαλεί προσωρινή αγγειοσύσπαση. Αυτό βοηθά στη γρήγορη υποχώρηση του πρωινού πρηξίματος, ειδικά στην περιοχή γύρω από τα μάτια.",
+    cold2: "<strong>Καταπράυνση ερεθισμών.</strong> Η δροσερή αίσθηση ανακουφίζει άμεσα από ήπια ερυθρότητα, αίσθημα καύσου ή φλεγμονή.",
+    cold3: "<strong>Διατήρηση της σταθερότητας.</strong> Οι χαμηλές θερμοκρασίες (2&deg;C έως 8&deg;C) επιβραδύνουν τη χημική αποδόμηση ορισμένων ασταθών πεπτιδίων και αντιοξειδωτικών, παρατείνοντας τη δραστικότητά τους.",
     bakEyebrow: "Φυτικό anti-age ενεργό",
     bakTitle: "Bakuchiol.<br>Φυτική, ήπια αντιγήρανση.",
     bakText: "Φυτική εναλλακτική της ρετινόλης, σε ποσοστό 1% στην Advanced Peptide Anti-Age Cream μας.",
