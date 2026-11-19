@@ -393,13 +393,20 @@
 
   /* ritual */
   .ritual { background: var(--sand); padding-block: 88px; }
+  /* tall texture photo on the left, intro and steps stacked on the right */
   .ritual-row {
     display: grid;
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 2.2fr);
-    gap: 48px;
+    grid-template-columns: minmax(0, 0.75fr) minmax(0, 2fr);
+    grid-template-areas: "img intro" "img steps";
+    column-gap: 56px;
+    row-gap: 44px;
     align-items: center;
   }
-  .ritual-intro { display: grid; gap: 18px; }
+  .ritual-img { grid-area: img; margin: 0; }
+  /* arch top, same shape as the small step photos */
+  .ritual-img img { width: 100%; aspect-ratio: 736 / 1308; object-fit: cover; border-radius: 999px 999px 8px 8px; }
+  .ritual-intro { grid-area: intro; align-self: end; display: grid; gap: 18px; }
+  .ritual .steps { grid-area: steps; align-self: start; }
   .steps {
     list-style: none;
     margin: 0;
@@ -478,6 +485,8 @@
     .ingredients-row, .ritual-row, .philosophy-row, .contact-row { grid-template-columns: minmax(0, 1fr); }
     .bak-lists { grid-template-columns: minmax(0, 1fr); gap: 36px; }
     .why { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+    .ritual-row { grid-template-areas: "intro" "img" "steps"; row-gap: 36px; }
+    .ritual-img { width: min(280px, 70%); justify-self: center; }
     .why-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 36px; }
     .step::after { display: none; }
@@ -769,6 +778,9 @@
 
   <section class="ritual" id="ritual">
     <div class="wrap ritual-row">
+      <figure class="ritual-img">
+        <img src="img/textures-trio.jpg" alt="Three textures side by side: golden serum, amber serum and a rich cream" loading="lazy">
+      </figure>
       <div class="ritual-intro">
         <p class="eyebrow" data-i18n="riEyebrow">Your skincare ritual</p>
         <h2 data-i18n="riTitle">Simple steps.<br>Lasting results.</h2>
@@ -791,7 +803,7 @@
           <p data-i18n="s3Text">Peptide Anti-Age Cream</p>
         </li>
         <li class="step">
-          <div class="step-visual"><svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.1"><circle cx="22" cy="22" r="8"/><path d="M22 4v6M22 34v6M4 22h6M34 22h6M9.3 9.3l4.2 4.2M30.5 30.5l4.2 4.2M9.3 34.7l4.2-4.2M30.5 13.5l4.2-4.2"/></svg></div>
+          <div class="step-visual"><img src="img/sun-drops.jpg" alt="" loading="lazy"></div>
           <h3 data-i18n="s4Title">Protect</h3>
           <p data-i18n="s4Text">Daily sunscreen</p>
         </li>
